@@ -1,0 +1,224 @@
+<!DOCTYPE html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StreamTile Drainage Mapping | Henderson Ag Technology</title>
+  <meta name="description" content="Professional drainage tile mapping services – accurate, high-resolution as-built tile maps for repair, maintenance, and new installations." />
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- STREAMTILE PAGE – MATCHING THE BLACK + NEON LIME GREEN LOGO COLORS -->
+  <style>
+    .bento-container {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 2rem;
+      flex: 1;
+    }
+    @media (min-width: 1025px) {
+      .bento-container { aspect-ratio: 3.5 / 2; min-height: 660px; max-height: 960px; }
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: clamp(2rem, 4vw, 3rem);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      word-wrap: break-word;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.18); }
+
+    .card > *:not(img) { max-width: 90%; }
+
+    .card h3 { 
+      color: #39FF14; 
+      margin: 1rem 0 0.8rem; 
+      font-size: clamp(1.3rem, 3vw, 1.9rem); 
+      font-weight: 700; 
+    }
+    .card p { 
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem); 
+      line-height: 1.5; 
+      color: #444; 
+    }
+
+    /* Desktop layout – 6 cards */
+    .hero      { grid-area: 1/1/9/6; background: #000000; color: #39FF14; }
+    .tagline   { grid-area: 1/6/3/13; background:#111111; color:white; font-size: clamp(1.8rem,6vw,3rem); padding:3rem; font-weight:700; }
+    .mapping   { grid-area: 3/6/6/9; background:#f8f9fa; }
+    .benefits  { grid-area: 3/9/6/13; background:#f8f9fa; }
+    .book      { grid-area: 6/6/9/9; background:#000000; color:white; }
+    .portal    { grid-area: 6/9/9/13; background:#111111; color:white; }
+
+    .hero img { 
+      width: clamp(280px, 45vw, 380px); 
+      margin-bottom: 2rem; 
+      flex-shrink: 0;
+    }
+    .hero h1  { 
+      font-size: clamp(3.2rem, 10vw, 5.2rem); 
+      margin:0; 
+      font-weight:800; 
+      letter-spacing:-1px; 
+      line-height: 1;
+      color: #39FF14;
+    }
+    .hero p   { 
+      font-size: clamp(1.4rem, 5vw, 2rem); 
+      opacity:0.95; 
+      margin:0.8rem 0 1.2rem; 
+      color: white;
+    }
+    .hero small { font-size: clamp(1rem, 2.5vw, 1.3rem); opacity:0.9; color: #aaaaaa; }
+
+    .mapping::before, .benefits::before {
+      content: "";
+      width: clamp(70px, 15vw, 100px);
+      height: clamp(70px, 15vw, 100px);
+      background: #39FF14;
+      opacity: 0.15;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .book a, .portal a {
+      background: #39FF14;
+      color: #000000;
+      padding: clamp(0.9rem, 2vw, 1.2rem) clamp(2rem, 5vw, 3rem);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      margin-top: 1.5rem;
+      display: inline-block;
+      transition: background .3s;
+    }
+    .book a:hover, .portal a:hover { background: white; color: #39FF14; }
+
+    /* Mobile */
+    @media (max-width: 1024px) {
+      .bento-container {
+        margin: 2rem auto 4rem;
+        padding: 0 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .card { 
+        padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem); 
+      }
+      .hero    { order:1; min-height:480px; }
+      .tagline { order:2; min-height:220px; }
+      .mapping  { order:3; min-height:320px; }
+      .benefits{ order:4; min-height:320px; }
+      .book    { order:5; min-height:280px; }
+      .portal  { order:6; min-height:280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" class="logo">
+          <img src="https://i.ibb.co/0jYkK7L/henderson-ag-logo.png" alt="Henderson Ag Technology">
+          Henderson Ag Technology
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="ag-leader.html">Ag Leader</a>
+          <a href="digifarm.html">DigiFarm</a>
+          <a href="streamtile.html" style="color:#39FF14;"><strong>StreamTile</strong></a>
+          <a href="mailto:Adam@HAT.ag">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="bento-container">
+
+      <!-- 1. Hero – perfect black background to match your logo -->
+      <div class="card hero">
+        <img src="streamtile-logo.png" alt="StreamTile" > <!-- replace with your exact file name of the uploaded logo -->
+        <h1>StreamTile</h1>
+        <p>Drainage Mapping</p>
+        <small>Professional • Accurate • High-Resolution Tile Maps</small>
+      </div>
+
+      <!-- 2. Tagline -->
+      <div class="card tagline">
+        Know Exactly Where<br>Your Tile Is
+      </div>
+
+      <!-- 3. Mapping Service -->
+      <div class="card mapping">
+        <h3>Drainage Tile Mapping Service</h3>
+        <p>We bring StreamTile's advanced mapping technology to your fields. High-accuracy RTK accuracy tile location mapping for existing systems or new installations. Full digital delivery in formats compatible with all major precision ag platforms.</p>
+      </div>
+
+      <!-- 4. Benefits -->
+      <div class="card benefits">
+        <h3>Why Map Your Tile?</h3>
+        <p>Find broken or plugged lines • Plan new installations • Verify contractor work • Improve yields through better water management • Save time & money on repairs • Increase field efficiency & profitability</p>
+      </div>
+
+      <!-- 5. Book Service -->
+      <div class="card book">
+        <h3 style="color:white;">Book Your<br>Field Mapping</h3>
+        <p style="color:#ccc;">Fall & winter slots filling fast — lock in your fields now</p>
+        <a href="mailto:Adam@HAT.ag?subject=StreamTile Drainage Mapping Inquiry">Email Adam →</a>
+        <a href="tel:765-438-3971" style="margin-top:0.8rem; display:inline-block;">765-438-3971</a>
+      </div>
+
+      <!-- 6. StreamTile Portal / Website -->
+      <div class="card portal">
+        <h3 style="color:white;">StreamTile<br>Website & Portal</h3>
+        <p style="color:#ddd;">View coverage maps, book online, support, resources</p>
+        <a href="https://streamtile.com" target="_blank">streamtile.com →</a>
+      </div>
+
+    </main>
+
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-contact">
+        <strong style="color:white;">Henderson Ag Technology</strong>
+        <p>4136 N 100 E • Windfall, IN 46076</p>
+        <p><strong>Phone:</strong> <a href="tel:765-438-3971">765-438-3971</a></p>
+        <p><strong>Email:</strong> <a href="mailto:Adam@HAT.ag">Adam@HAT.ag</a></p>
+        <p>Proudly serving the Midwest</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.youtube.com/@hendersonagtechnology" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/hendersonagtech" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/HendersonAgTech" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://github.com/adamhatag" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="footer-copy">
+        <p>© <span id="year"></span> Henderson Ag Technology • All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
