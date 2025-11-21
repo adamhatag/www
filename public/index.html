@@ -1,112 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Henderson Ag Technology - Roots to Sky</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Henderson Ag Technology</title>
+  <meta name="description" content="Precision Ag Sales & Service | Ag Leader Technology | DigiFarm | StreamTile Drainage Mapping | Computer & Networking" />
+
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- HOMEPAGE BENTO – STREAMTILE MOVED TO BOTTOM ROW LEFT OF COMPUTER -->
+  <style>
+    .bento-container {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 2rem;
+      flex: 1;
+    }
+    @media (min-width: 1025px) {
+      .bento-container { aspect-ratio: 3.5 / 2; min-height: 660px; max-height: 960px; }
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: clamp(1.8rem, 4vw, 3rem);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      word-wrap: break-word;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.18); }
+
+    .card > *:not(img) { max-width: 92%; }
+
+    .card h3 { 
+      color: #228B22; 
+      margin: 1rem 0 0.8rem; 
+      font-size: clamp(1.3rem, 3vw, 1.9rem); 
+      font-weight: 700; 
+    }
+    .card p { 
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem); 
+      line-height: 1.5; 
+      color: #444; 
+    }
+
+    .card img {
+      width: clamp(180px, 35vw, 260px);
+      flex-shrink: 0;
+      margin-bottom: 1rem;
+    }
+
+    /* Desktop positions – StreamTile now bottom-left, Computer bottom-right */
+    .logo-section   { grid-area: 1/1/9/6; background: linear-gradient(135deg,#228B22,#1a6d1a); color:white; }
+    .tagline        { grid-area: 1/6/3/13; background:#f5f5f5; font-size: clamp(1.6rem,5vw,2.8rem); padding:3rem; font-weight:700; }
+    .ag-leader      { grid-area: 3/6/6/10; }   /* wider middle left */
+    .digifarm       { grid-area: 3/10/6/13; }  /* wider middle right */
+    .streamtile     { grid-area: 6/6/9/10; background:#f8f9fa; }   /* bottom left */
+    .computer       { grid-area: 6/10/9/13; background:#f8f9fa; }  /* bottom right */
+
+    .logo-section img { width: clamp(200px, 40vw, 300px); margin-bottom: 2rem; }
+    .logo-section h1 { font-size: clamp(3rem,10vw,5rem); margin:0; font-weight:800; }
+    .logo-section p  { font-size: clamp(1.4rem,5vw,2rem); opacity:0.95; margin:0.8rem 0 1.2rem; }
+
+    /* Mobile stack order */
+    @media (max-width: 1024px) {
+      .bento-container {
+        margin: 2rem auto 4rem;
+        padding: 0 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .card { padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem); }
+      .logo-section   { order:1; min-height:480px; }
+      .tagline        { order:2; min-height:220px; }
+      .ag-leader      { order:3; min-height:300px; }
+      .digifarm       { order:4; min-height:300px; }
+      .streamtile     { order:5; min-height:300px; }
+      .computer       { order:6; min-height:340px; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 w-full bg-[var(--forest-green)] text-white p-4 shadow-lg z-10">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <a href="index.html">
-        <img src="placeholder-logo.png" alt="Henderson Ag Technology Logo" class="w-32"> <!-- Recommended dimensions: 400x100 pixels -->
-      </a>
-      <ul class="flex space-x-6">
-        <li><a href="index.html" class="hover:text-[var(--terracotta)]">Home</a></li>
-        <li><a href="products.html" class="hover:text-[var(--terracotta)]">Products</a></li>
-        <li><a href="digifarm.html" class="hover:text-[var(--terracotta)]">DigiFarm</a></li>
-        <li><a href="agleader.html" class="hover:text-[var(--terracotta)]">Ag Leader</a></li>
-        <li><a href="streamtile.html" class="hover:text-[var(--terracotta)]">StreamTile</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <header class="hero-bg pt-20"> <!-- Padding to account for fixed navbar -->
-    <div class="hero-content">
-      <h1 class="text-5xl md:text-7xl font-bold text-[var(--forest-green)] mb-4 fade-in fade-in-delay-1">
-        Roots to Sky: Precision Ag Solutions
-      </h1>
-      <p class="text-2xl text-[var(--terracotta)] mb-8 fade-in fade-in-delay-2 max-w-3xl">
-        As your trusted dealer, we offer sales, installations, and repairs for high-quality Ag Leader and DigiFarm products, plus expert GPR scanning services for tile mapping. Harness technology from sky signals to soil insights for your farm's success.
-      </p>
-      <a href="tel:[Your Phone Number]" class="cta-button inline-block text-xl hover-pop fade-in fade-in-delay-3">
-        Get a Free Quote Today
-      </a>
-    </div>
-  </header>
+  <div class="page-wrapper">
 
-  <!-- Services & Products Teaser Cards -->
-  <section class="section-bg">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-center text-[var(--forest-green)] mb-12 fade-in">Our Comprehensive Offerings</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Above: DigiFarm -->
-        <div class="card hover-pop fade-in fade-in-delay-1">
-          <img src="placeholder-digifarm-beacon.jpg" alt="DigiFarm Beacon Product" class="w-full h-48 object-cover rounded-t-lg mb-4"> <!-- 600x400 pixels -->
-          <h3 class="text-3xl font-semibold text-[var(--sky-blue)] mb-2">Above: Sky-High Precision with DigiFarm</h3>
-          <p class="text-lg mb-4">Sales and service for RTK beacons, modems, and VBN subscriptions providing seamless, accurate GPS corrections without base stations.</p>
-          <img src="placeholder-digifarm-logo.jpg" alt="DigiFarm Logo" class="w-32 mx-auto"> <!-- Replace with e.g., https://digifarm.com/wp-content/uploads/2022/09/DigiFarm-Logo-1.png; 300x100 pixels -->
-        </div>
-        <!-- At: Ag Leader -->
-        <div class="card hover-pop fade-in fade-in-delay-2">
-          <img src="placeholder-ag-leader-display.jpg" alt="Ag Leader InCommand Display" class="w-full h-48 object-cover rounded-t-lg mb-4"> <!-- 600x400 pixels -->
-          <h3 class="text-3xl font-semibold text-[var(--forest-green)] mb-2">At: Grounded Innovation with Ag Leader</h3>
-          <p class="text-lg mb-4">High-ticket sales, installs, and repairs for guidance systems, displays, yield monitors, planters, and tile plows to optimize your daily operations.</p>
-          <img src="placeholder-ag-leader-logo.jpg" alt="Ag Leader Logo" class="w-32 mx-auto"> <!-- Replace with e.g., https://www.agleader.com/wp-content/uploads/2021/09/AgLeader_logo_blue.png; 300x100 pixels -->
-        </div>
-        <!-- Below: GPR Scanning (StreamTile) -->
-        <div class="card hover-pop fade-in fade-in-delay-3">
-          <img src="placeholder-gpr-scanner.jpg" alt="StreamTile GPR Equipment" class="w-full h-48 object-cover rounded-t-lg mb-4"> <!-- 600x400 pixels -->
-          <h3 class="text-3xl font-semibold text-[var(--terracotta)] mb-2">Below: Hidden Insights with GPR Scanning</h3>
-          <p class="text-lg mb-4">Non-destructive subsurface mapping using advanced GPR technology to detect and repair drainage tiles, integrated with your precision ag setup.</p>
-          <img src="placeholder-streamtile-logo.jpg" alt="StreamTile Logo" class="w-32 mx-auto"> <!-- Replace with e.g., https://streamtile.com/wp-content/uploads/2023/01/streamtile-logo.png; 300x100 pixels -->
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" class="logo">
+          <img src="https://i.ibb.co/0jYkK7L/henderson-ag-logo.png" alt="Henderson Ag Technology">
+          Henderson Ag Technology
+        </a>
+        <div class="nav-links">
+          <a href="products.html">Products</a>
+          <a href="ag-leader.html">Ag Leader</a>
+          <a href="https://digifarm.com" target="_blank">DigiFarm</a>
+          <a href="https://streamtile.com" target="_blank">StreamTile</a>
+          <a href="mailto:Adam@HAT.ag">Contact</a>
         </div>
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- About Section -->
-  <section class="py-16 bg-[var(--slate-gray)] text-white">
-    <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="text-4xl font-bold mb-6 fade-in">About Henderson Ag Technology</h2>
-      <p class="text-xl mb-8 fade-in fade-in-delay-1">As a small business and full-line Ag Leader dealer, we provide nationwide sales and Indiana-based services for precision farming tech. From sky signals to soil mapping, we're your partner for efficient, high-value solutions. LICA member with custom expertise in networks, cameras, and thermal tech.</p>
-      <img src="placeholder-about-image.jpg" alt="Team or Farm Scene" class="mx-auto w-96 rounded-lg shadow-lg fade-in fade-in-delay-2"> <!-- 800x600 pixels -->
-    </div>
-  </section>
+    <main class="bento-container">
 
-  <!-- Contact Section -->
-  <section id="contact" class="section-bg">
-    <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="text-4xl font-bold text-[var(--forest-green)] mb-6 fade-in">Ready to Elevate Your Farm?</h2>
-      <p class="text-xl mb-8 fade-in fade-in-delay-1">Contact us for personalized quotes on Ag Leader, DigiFarm products, or GPR services. Call, email, or schedule a consultation.</p>
-      <div class="mb-8">
-        <p class="text-lg"><strong>Address:</strong> [Your Business Address, e.g., 123 Farm Lane, Indianapolis, IN 46201]</p>
-        <p class="text-lg"><strong>Phone:</strong> <a href="tel:[Your Phone Number]">[Your Phone Number, e.g., (317) 555-1234]</a></p>
-        <p class="text-lg"><strong>Email:</strong> <a href="mailto:[Your Email Address]">[Your Email Address, e.g., info@hendersonagtech.com]</a></p>
+      <div class="card logo-section">
+        <img src="https://i.ibb.co/0jYkK7L/henderson-ag-logo.png" alt="Henderson Ag Technology">
+        <h1>Henderson</h1>
+        <p>Ag Technology</p>
       </div>
-      <form class="max-w-md mx-auto fade-in fade-in-delay-2">
-        <input type="text" placeholder="Your Name" class="w-full p-3 mb-4 border rounded">
-        <input type="email" placeholder="Your Email" class="w-full p-3 mb-4 border rounded">
-        <textarea placeholder="Your Message" class="w-full p-3 mb-4 border rounded h-32"></textarea>
-        <button type="submit" class="cta-button w-full hover-pop">Send Inquiry</button>
-      </form>
-    </div>
-  </section>
 
-  <!-- Footer -->
+      <div class="card tagline">
+        <strong>Precision Agriculture Sales & Service</strong><br><br>
+        Bringing tomorrow’s technology to today’s farm.
+      </div>
+
+      <div class="card ag-leader">
+        <img src="https://agleader.com/wp-content/uploads/2023/06/AgLeader-Logo-Color.png" alt="Ag Leader">
+        <h3>Ag Leader Technology</h3>
+        <p>Sales and service for precision farming solutions.</p>
+      </div>
+
+      <div class="card digifarm">
+        <img src="https://digifarm.com/wp-content/uploads/2023/01/DigiFarm-Logo.png" alt="DigiFarm">
+        <h3>DigiFarm Products</h3>
+        <p>Sales and service for RTK and GNSS technology.</p>
+      </div>
+
+      <div class="card streamtile">
+        <img src="https://streamtile.com/logo.png" alt="StreamTile">
+        <h3>StreamTile Mapping</h3>
+        <p>Professional drainage tile mapping services.</p>
+      </div>
+
+      <div class="card computer">
+        <h3>Computer & Networking Services</h3>
+        <p>Expert installation, troubleshooting, and support for farm office and in-cab computing, wireless networks, data management, and cabling.</p>
+      </div>
+
+    </main>
+
+  </div>
+
   <footer>
-    <p>&copy; 2025 Henderson Ag Technology. All rights reserved.</p>
-    <p>Address: [Your Business Address] | Phone: <a href="tel:[Your Phone Number]">[Your Phone Number]</a> | Email: <a href="mailto:[Your Email Address]">[Your Email Address]</a></p>
-    <div class="social-icons mt-4">
-      <a href="[Your Facebook URL]" target="_blank">Facebook</a> |
-      <a href="[Your Twitter/X URL]" target="_blank">Twitter/X</a> |
-      <a href="[Your GitHub URL]" target="_blank">GitHub</a> |
-      <a href="[Other Social URL]" target="_blank">Instagram (or other)</a> |
-      <a href="[Additional Link]" target="_blank">LinkedIn (or other)</a>
+    <div class="footer-container">
+      <div class="footer-contact">
+        <strong style="color:white;">Henderson Ag Technology</strong>
+        <p>4136 N 100 E • Windfall, IN 46076</p>
+        <p><strong>Phone:</strong> <a href="tel:765-438-3971">765-438-3971</a></p>
+        <p><strong>Email:</strong> <a href="mailto:Adam@HAT.ag">Adam@HAT.ag</a></p>
+        <p>Proudly serving the Midwest</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.youtube.com/@hendersonagtechnology" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/hendersonagtech" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/HendersonAgTech" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://github.com/adamhatag" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="footer-copy">
+        <p>© <span id="year"></span> Henderson Ag Technology • All rights reserved</p>
+      </div>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
