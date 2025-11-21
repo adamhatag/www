@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StreamTile Drainage Mapping | Henderson Ag Technology</title>
+  <meta name="description" content="Professional drainage tile mapping services – accurate, high-resolution as-built tile maps for repair, maintenance, and new installations." />
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.1/leaflet-omnivore.min.js"></script>
+
+  <!-- STREAMTILE PAGE – BENEFITS BOX NOW PERFECTLY FILLS ITS GRID AREA -->
+  <style>
+    .bento-container {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 2rem;
+      flex: 1;
+    }
+    @media (min-width: 1025px) {
+      .bento-container { aspect-ratio: 3.5 / 2; min-height: 660px; max-height: 960px; }
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: clamp(2rem, 4vw, 3rem);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      word-wrap: break-word;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.18); }
+
+    .card > *:not(img):not(#tilemap) { max-width: 90%; }
+
+    .card h3 { 
+      color: #FF8C00; 
+      margin: 1rem 0 0.8rem; 
+      font-size: clamp(1.3rem, 3vw, 1.9rem); 
+      font-weight: 700; 
+    }
+    .card p { 
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem); 
+      line-height: 1.5; 
+      color: #333; 
+    }
+
+    /* Desktop layout – Benefits now truly fills the tall right column */
+    .hero      { grid-area: 1/1/9/6; background: #000000; color:white; }
+    .tagline   { grid-area: 1/6/3/13; background:#000000; color:white; font-size: clamp(1.Map1.8rem,6vw,3rem); padding:3rem; font-weight:700; }
+    .mapping   { grid-area: 3/6/6/9; background:#f5f5f5; }
+    .benefits  { 
+      grid-area: 3/9/9/13; 
+      background:#f5f5f5; 
+      padding: 1.5rem 1.5rem 1.5rem 1.5rem;   /* reduced padding so map has max space */
+      display: flex;
+      flex-direction: column;
+    }
+    .portal    { grid-area: 6/6/9/9; background:#000000; color:white; }
+
+    /* Make the map fill the entire benefits card */
+    #tilemap {
+      flex: 1;
+      width: 100%;
+      min-height: 420px;     /* guarantees good size even if card is smaller */
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+
+    .hero img { 
+      width: clamp(300px, 45vw, 420px); 
+      margin-bottom: 1.5rem; 
+      flex-shrink: 0;
+    }
+    .hero h1  { 
+      font-size: clamp(3.2rem, 10vw, 5.2rem); 
+      margin:0; 
+      font-weight:800; 
+      line-height: 1;
+      color: white;
+    }
+    .hero .orange { color: #FF8C00; }
+    .hero p   { 
+      font-size: clamp(1.4rem, 5vw, 2rem); 
+      opacity:0.95; 
+      margin:0.8rem 0 1.2rem; 
+      color: white;
+    }
+    .hero small { font-size: clamp(1rem, 2.5vw, 1.3rem); opacity:0.9; color: #999; }
+
+    .portal a {
+      background: #FF8C00;
+      color: white;
+      padding: clamp(0.9rem, 2vw, 1.2rem) clamp(2rem, 5vw, 3rem);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      margin-top: 1.5rem;
+      display: inline-block;
+      transition: background .3s;
+    }
+    .portal a:hover { background: #ffffff; color: #FF8C00; }
+
+    /* Mobile – benefits still gets plenty of height */
+    @media (max-width: 1024px) {
+      .bento-container {
+        margin: 2rem auto 4rem;
+        padding: 0 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+      .card { padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 2.5rem); }
+      .hero    { order:1; min-height:480px; }
+      .tagline { order:2; min-height:220px; }
+      .mapping  { order:3; min-height:320px; }
+      .benefits{ order:4; min-height:600px; padding:1.5rem; }
+      .portal  { order:5; min-height:280px; }
+      #tilemap { min-height: 500px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" class="logo">
+          <img src="https://i.ibb.co/0jYkK7L/henderson-ag-logo.png" alt="Henderson Ag Technology">
+          Henderson Ag Technology
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="ag-leader.html">Ag Leader</a>
+          <a href="digifarm.html">DigiFarm</a>
+          <a href="streamtile.html" style="color:#FF8C00;"><strong>StreamTile</strong></a>
+          <a href="mailto:Adam@HAT.ag">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="bento-container">
+
+      <!-- Hero -->
+      <div class="card hero">
+        <img src="streamtile-official-logo.png" alt="StreamTile">
+        <h1>Stream<span class="orange">Tile</span></h1>
+        <p>Drainage Mapping</p>
+        <small>Powered by IDS GeoRadar • Professional As-Built Tile Maps</small>
+      </div>
+
+      <!-- Tagline -->
+      <div class="card tagline">
+        Know Exactly Where<br>Your Tile Is
+      </div>
+
+      <!-- Mapping Service -->
+      <div class="card mapping">
+        <h3>StreamTile Mapping Service</h3>
+        <p>High-resolution, RTK-accurate tile location mapping for existing drainage systems or new installations. Full digital delivery compatible with all major precision ag platforms.</p>
+      </div>
+
+      <!-- Benefits + Full-Height Interactive Map -->
+      <div class="card benefits">
+        <h3>Explore Sample Tile Map</h3>
+        <p>Zoom and pan this live example – your custom maps will be even more detailed and accurate.</p>
+        <div id="tilemap"></div>
+      </div>
+
+      <!-- Portal / Website Link -->
+      <div class="card portal">
+        <h3 style="color:white;">StreamTile<br>Website & Portal</h3>
+        <p style="color:#ccc;">View coverage, book online, support, resources</p>
+        <a href="https://streamtile.com" target="_blank">streamtile.com →</a>
+      </div>
+
+    </main>
+
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-contact">
+        <strong style="color:white;">Henderson Ag Technology</strong>
+        <p>4136 N 100 E • Windfall, IN 46076</p>
+        <p><strong>Phone:</strong> <a href="tel:765-438-3971">765-438-3971</a></p>
+        <p><strong>Email:</strong> <a href="mailto:Adam@HAT.ag">Adam@HAT.ag</a></p>
+        <p>Proudly serving the Midwest</p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.youtube.com/@hendersonagtechnology" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/hendersonagtech" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/HendersonAgTech" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://github.com/adamhatag" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="footer-copy">
+        <p>© <span id="year"></span> Henderson Ag Technology • All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var map = L.map('tilemap', {
+      scrollWheelZoom: true,
+      touchZoom: true,
+      doubleClickZoom: true,
+      boxZoom: true,
+      keyboard: true
+    }).setView([40.4095, -85.9519], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // === PUT YOUR KML OR GEOJSON URL HERE ===
+    // Example public test KML (remove this when you have your file
+    // omnivore.kml('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions.geojson').addTo(map);
+
+    // When you have your tile map file hosted, just replace the line above with:
+    // omnivore.kml('https://yourdomain.com/your-tile-map.kml').addTo(map);
+    // or for GeoJSON:
+    // fetch('your-map.geojson').then(r => r.json()).then(data => L.geoJSON(data).addTo(map));
+
+    L.marker([40.4095, -85.9519]).addTo(map)
+      .bindPopup('Henderson Ag Technology<br>Windfall, IN')
+      .openPopup();
+  </script>
+</body>
+</html>
