@@ -7,7 +7,7 @@
   <meta name="description" content="Professional drainage tile mapping services – accurate, high-resolution as-built tile maps for repair, maintenance, and new installations." />
 
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.15.4/css/all.min.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.1/leaflet-omnivore.min.js"></script>
@@ -60,7 +60,7 @@
 
     /* Desktop layout – Benefits now truly fills the tall right column */
     .hero      { grid-area: 1/1/9/6; background: #000000; color:white; }
-    .tagline   { grid-area: 1/6/3/13; background:#000000; color:white; font-size: clamp(1.Map1.8rem,6vw,3rem); padding:3rem; font-weight:700; }
+    .tagline   { grid-area: 1/6/3/13; background:#000000; color:white; font-size: clamp(1.8rem,6vw,3rem); padding:3rem; font-weight:700; }
     .mapping   { grid-area: 3/6/6/9; background:#f5f5f5; }
     .benefits  { 
       grid-area: 3/9/9/13; 
@@ -145,9 +145,7 @@
           Henderson Ag Technology
         </a>
         <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="products.html">Products</a>
-          <a href="ag-leader.html">Ag Leader</a>
+          <a href="agleader.html">Ag Leader</a>
           <a href="digifarm.html">DigiFarm</a>
           <a href="streamtile.html" style="color:#FF8C00;"><strong>StreamTile</strong></a>
           <a href="tel:765-438-3971">(765) 438-3971</a>
@@ -226,23 +224,30 @@
       doubleClickZoom: true,
       boxZoom: true,
       keyboard: true
-    }).setView([40.4095, -85.9519], 16);
+    }).setView([40.479129, -86.982402], 14);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+    // ESRI Satellite / Aerial Imagery – looks incredible with tile lines overlaid
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 22
     }).addTo(map);
+   
 
-    // === PUT YOUR KML OR GEOJSON URL HERE ===
-    // Example public test KML (remove this when you have your file
-    // omnivore.kml('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions.geojson').addTo(map);
+    // Your actual KML file loaded here
+    omnivore.kml('maps/purdue_rev2.kml').addTo(map);
 
-    // When you have your tile map file hosted, just replace the line above with:
-    // omnivore.kml('https://yourdomain.com/your-tile-map.kml').addTo(map);
-    // or for GeoJSON:
-    // fetch('your-map.geojson').then(r => r.json()).then(data => L.geoJSON(data).addTo(map));
+    // Optional: make tile lines pop more on aerial background
+    kmlLayer.eachLayer(function(layer) {
+      if (layer.feature.geometry.type === 'LineString' || layer.feature.geometry.type === 'MultiLineString') {
+        layer.setStyle({
+          color: '#FF8C00',
+          weight: 5,
+          opacity: 0.9
+        });
+      }
+    });
 
-    L.marker([40.4095, -85.9519]).addTo(map)
-      .bindPopup('Henderson Ag Technology<br>Windfall, IN')
+    L.marker([40.479129, -86.982402]).addTo(map)
+      .bindPopup('Purdue ACRE Farm<br>West Lafayette, IN')
       .openPopup();
   </script>
 </body>

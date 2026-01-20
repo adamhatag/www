@@ -1,0 +1,3 @@
+
+# Redirects everything from your Netlify domain to your Square site
+/* https://hendersonagtech.square.site/:splat 301!
